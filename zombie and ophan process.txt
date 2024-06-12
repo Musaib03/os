@@ -1,0 +1,51 @@
+Zombie process
+#include <stdlib.h>
+
+#include <sys/types.h>
+
+#include <unistd.h>
+
+int main()
+
+{
+
+     pid_t child_pid = fork();
+
+    if (child_pid > 0) {
+
+        sleep(10);
+
+printf(“Parent process woke up”); }
+
+          else  {     
+
+        exit(0);}
+
+      return 0;
+
+}
+
+Orphan process
+#include<stdio.h>
+
+#include<unistd.h>
+
+int main()
+
+{
+
+pid_t p;
+
+p=fork();
+
+if(p==0) {
+
+ sleep(10); 
+
+printf("The child process pid is %d parent pid %d\n", getpid(), getppid());
+
+sleep(20);
+
+printf("\nProcess %d is done its Parent pid %d...\n", getpid(), getppid());}
+
+return 0; }

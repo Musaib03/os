@@ -1,0 +1,53 @@
+#!/bin/bash
+
+echo "Enter the number of terms:"
+read num
+
+# Initializing first two Fibonacci numbers
+a=0
+b=1
+
+echo "Fibonacci series up to $num terms:"
+
+# Print the first two Fibonacci numbers
+echo -n "$a "
+echo -n "$b "
+
+# Generating Fibonacci series
+for (( i=2; i<num; i++ ))
+do
+    next=$((a + b))
+    echo -n "$next "
+    a=$b
+    b=$next
+done
+
+echo ""
+
+
+# another proggram
+
+#!/bin/bash
+
+echo "Enter the number of terms for Fibonacci series:"
+read n
+
+# Initialize variables
+a=0
+b=1
+counter=2
+
+# Display the first two terms
+echo "Fibonacci Series up to $n terms:"
+echo "$a"
+echo "$b"
+
+# Generate Fibonacci series
+while [ $counter -lt $n ]
+do
+  c=$((a + b))
+  echo "$c"
+  a=$b
+  b=$c
+  counter=$((counter + 1))
+done

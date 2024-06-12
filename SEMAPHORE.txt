@@ -1,0 +1,42 @@
+import threading
+
+class BinarySemaphore:
+    def _init_(self, initial=1):
+        self.value = initial
+        self._lock = threading.Lock()
+        self._nonzero = threading.Condition(self._lock)
+
+    def acquire(self):
+        with self._lock:
+            while self.value == 0:
+                self._nonzero.wait()
+            self.value = 0
+
+    def release(self):
+        with self._lock:
+            self.value = 1
+            self._nonzero.notify()
+
+# Example usage
+sem = BinarySemaphore()
+
+def task(name):
+    print(f"{name} is waiting to acquire the semaphore")
+    sem.acquire()
+    print(f"{name} has acquired the semaphore")
+    # Critical section
+    print(f"{name} is releasing the semaphore")
+    sem.release()
+
+# Create threads
+threads = [threading.Thread(target=task, args=(f"Task {i}",)) for i in range(2)]
+
+# Start threads
+for t in threads:
+    t.start()
+
+# Wait for all threads to complete
+for t in threads:
+    t.join()
+
+print("All tasks completed")
