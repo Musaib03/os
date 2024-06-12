@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# Function to check if a number is an Armstrong number
+is_armstrong() {
+    local num=$1
+    local sum=0
+    local temp=$num
+    local digits=${#num}
+
+    while [ $temp -gt 0 ]; do
+        local digit=$((temp % 10))
+        sum=$((sum + digit ** digits))
+        temp=$((temp / 10))
+    done
+
+    if [ $sum -eq $num ]; then
+        echo "$num is an Armstrong number."
+    else
+        echo "$num is not an Armstrong number."
+    fi
+}
+
+# Read number from user
+read -p "Enter a number: " number
+
+# Check if the number is an Armstrong number
+is_armstrong $number

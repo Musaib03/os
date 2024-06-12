@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Read the main string and the substring to search for from the user
+read -p "Enter the main string: " main_string
+read -p "Enter the substring to search for: " substring
+
+# Use grep to search for the substring within the main string
+if echo "$main_string" | grep -q "$substring"; then
+    echo "The substring '$substring' was found in the main string."
+else
+    echo "The substring '$substring' was not found in the main string."
+fi
